@@ -1,0 +1,9 @@
+# Build configuration for frontend on Render
+[build]
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
