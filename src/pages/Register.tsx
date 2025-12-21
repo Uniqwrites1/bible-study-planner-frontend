@@ -23,6 +23,8 @@ export default function Register() {
       await apiClient.register(email, password, fullName)
       // Auto-login after registration
       const { access_token } = await apiClient.login(email, password)
+      // Store token FIRST so subsequent API calls can use it
+      localStorage.setItem('token', access_token)
       const user = await apiClient.getCurrentUser()
       setAuth(access_token, user)
       navigate('/dashboard')
