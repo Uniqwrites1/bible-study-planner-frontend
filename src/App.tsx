@@ -20,8 +20,8 @@ function App() {
         <Route index element={<Navigate to="/dashboard" />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="create-plan" element={<CreatePlan />} />
-        <Route path="plan/:planId" element={<ReadingPlan />} />
-        <Route path="read" element={<BibleReader />} />
+        <Route path="reading-plan/:planId" element={<ReadingPlan />} />
+        <Route path="bible-reader" element={<BibleReader />} />
       </Route>
     </Routes>
   )

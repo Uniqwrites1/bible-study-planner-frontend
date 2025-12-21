@@ -50,7 +50,7 @@ function PlanCard({ plan }: { plan: any }) {
   )
 
   return (
-    <Link to={`/plan/${plan.id}`} className="card hover:shadow-lg transition-shadow">
+    <Link to={`/reading-plan/${plan.id}`} className="card hover:shadow-lg transition-shadow">
       <div className="space-y-4">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">{plan.name}</h3>
