@@ -1,8 +1,8 @@
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 import { apiClient } from '@/lib/api'
 import { format } from 'date-fns'
-import { CheckCircle, Circle } from 'lucide-react'
+import { CheckCircle, Circle, BookOpen } from 'lucide-react'
 
 export default function ReadingPlan() {
   const { planId } = useParams<{ planId: string }>()
@@ -56,14 +56,21 @@ export default function ReadingPlan() {
 
                 <div className="space-y-2">
                   {reading.readings.map((r: any, idx: number) => (
-                    <div key={idx} className="text-sm">
-                      <span className="font-medium text-gray-700">{r.book}</span>
-                      <span className="text-gray-600">
-                        {' '}{r.chapter_start}
-                        {r.chapter_end !== r.chapter_start && `-${r.chapter_end}`}
-                      </span>
-                      <span className="text-gray-400 text-xs ml-2">({r.section})</span>
-                    </div>
+                    <Link
+                      key={idx}
+                      to={`/bible-reader?book=${r.book}&chapterStart=${r.chapter_start}&chapterEnd=${r.chapter_end}&day=${reading.day_number}&planId=${planId}`}
+                      className="flex items-center space-x-2 text-sm hover:text-primary-600 transition-colors group"
+                    >
+                      <BookOpen className="h-4 w-4 text-gray-400 group-hover:text-primary-600" />
+                      <div>
+                        <span className="font-medium text-gray-700 group-hover:text-primary-600">{r.book}</span>
+                        <span className="text-gray-600 group-hover:text-primary-600">
+                          {' '}{r.chapter_start}
+                          {r.chapter_end !== r.chapter_start && `-${r.chapter_end}`}
+                        </span>
+                        <span className="text-gray-400 text-xs ml-2">({r.section})</span>
+                      </div>
+                    </Link>
                   ))}
                 </div>
               </div>
