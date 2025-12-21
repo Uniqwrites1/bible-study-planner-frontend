@@ -50,3 +50,43 @@ body {
     @apply bg-white rounded-lg shadow-md p-6;
   }
 }
+
+/* Bible text styling */
+span.v {
+  @apply font-bold text-primary-600 mr-1;
+  font-size: 0.75em;
+  vertical-align: super;
+}
+
+h2.c {
+  @apply text-2xl font-bold text-gray-900 my-4 block;
+}
+
+p.p {
+  @apply mb-4 text-gray-900;
+  text-indent: 1.5em;
+}
+
+span.wj {
+  @apply text-red-700;
+}
+
+span.add {
+  @apply italic text-gray-600;
+}
+
+/* Force dark text color for all Bible content */
+.bible-content,
+.bible-content * {
+  color: #111827 !important;
+}
+
+.bible-content span.wj,
+.bible-content span.wj * {
+  color: #b91c1c !important;
+}
+
+.bible-content span.v,
+.bible-content span.v * {
+  color: #2563eb !important;
+}

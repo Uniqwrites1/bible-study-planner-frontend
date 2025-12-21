@@ -175,7 +175,11 @@ export default function BibleReader() {
       <div className="card">
         {passageData.content ? (
           <div 
-            className="prose prose-lg max-w-none leading-relaxed"
+            className="bible-content prose max-w-none"
+            style={{ 
+              fontSize: '16px', 
+              lineHeight: '1.8'
+            }}
             dangerouslySetInnerHTML={{ __html: passageData.content }}
           />
         ) : (
@@ -183,7 +187,7 @@ export default function BibleReader() {
             <p className="text-gray-600">No content available</p>
             <details className="mt-4 text-left">
               <summary className="cursor-pointer text-sm text-gray-500">Debug Info</summary>
-              <pre className="mt-2 text-xs bg-gray-100 p-4 rounded overflow-auto">
+              <pre className="mt-2 text-xs bg-gray-100 p-4 rounded overflow-auto max-h-96">
                 {JSON.stringify(passageData, null, 2)}
               </pre>
             </details>
