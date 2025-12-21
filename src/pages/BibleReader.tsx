@@ -141,8 +141,17 @@ export default function BibleReader() {
   }
   
   if (!passageData) {
-    return <div className="text-center py-12">Failed to load Bible passage</div>
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600">Failed to load Bible passage</p>
+        <p className="text-sm text-gray-500 mt-2">Book: {book}, Chapters: {chapterStart}-{chapterEnd}</p>
+        <p className="text-sm text-gray-500">Passage ID: {passageId}</p>
+      </div>
+    )
   }
+  
+  // Debug: Log the API response
+  console.log('Bible API Response:', passageData)
   
   return (
     <div className="max-w-4xl mx-auto space-y-6">
@@ -164,10 +173,22 @@ export default function BibleReader() {
       
       {/* Bible Text */}
       <div className="card">
-        <div 
-          className="prose prose-lg max-w-none leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: passageData.content }}
-        />
+        {passageData.content ? (
+          <div 
+            className="prose prose-lg max-w-none leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: passageData.content }}
+          />
+        ) : (
+          <div className="text-center py-8">
+            <p className="text-gray-600">No content available</p>
+            <details className="mt-4 text-left">
+              <summary className="cursor-pointer text-sm text-gray-500">Debug Info</summary>
+              <pre className="mt-2 text-xs bg-gray-100 p-4 rounded overflow-auto">
+                {JSON.stringify(passageData, null, 2)}
+              </pre>
+            </details>
+          </div>
+        )}
       </div>
       
       {/* Highlight Menu */}
