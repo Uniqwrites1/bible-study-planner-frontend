@@ -24,12 +24,6 @@ const BOOK_ID_MAP: Record<string, string> = {
   '1 John': '1JN', '2 John': '2JN', '3 John': '3JN', 'Jude': 'JUD', 'Revelation': 'REV'
 }
 
-interface Highlight {
-  id: number
-  verse_id: string
-  color: string
-}
-
 interface Note {
   id: number
   verse_id?: string
@@ -70,7 +64,7 @@ export default function BibleReader() {
   )
   
   // Fetch highlights for this book
-  const { data: highlightsData } = useQuery(
+  useQuery(
     ['highlights', book, bibleVersion],
     () => apiClient.getHighlights(book, bibleVersion)
   )
@@ -81,7 +75,6 @@ export default function BibleReader() {
     () => apiClient.getNotes(book, chapterStart, bibleVersion)
   )
   
-  const highlights: Highlight[] = highlightsData || []
   const notes: Note[] = notesData || []
   
   // Mutations
@@ -98,13 +91,6 @@ export default function BibleReader() {
         setShowHighlightMenu(false)
         setSelectedVerse(null)
       }
-    }
-  )
-  
-  const deleteHighlightMutation = useMutation(
-    (highlightId: number) => apiClient.deleteHighlight(highlightId),
-    {
-      onSuccess: () => queryClient.invalidateQueries(['highlights'])
     }
   )
   
@@ -132,16 +118,6 @@ export default function BibleReader() {
       onSuccess: () => queryClient.invalidateQueries(['notes'])
     }
   )
-  
-  const handleVerseClick = (verseId: string) => {
-    if (selectedVerse === verseId) {
-      setSelectedVerse(null)
-      setShowHighlightMenu(false)
-    } else {
-      setSelectedVerse(verseId)
-      setShowHighlightMenu(true)
-    }
-  }
   
   const handleHighlight = (color: string) => {
     if (selectedVerse) {
